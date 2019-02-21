@@ -1,0 +1,9 @@
+tensorflow
+gpmol
+numpy
+scipy
+pandas
+matplotlib
+seaborn
+rdkit
+tqdm
