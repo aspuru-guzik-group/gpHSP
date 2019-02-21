@@ -6,5 +6,7 @@ Want to predict a probabilisitc model for solublity? Have low amounts of data? t
 
 
 ## Todo 
+
 [ ] Make end-to-end example.
+[ ] Make cheaper alternative models (e.g. smiles to HSP).
 [ ] Release gpmol dependency.
