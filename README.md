@@ -1,4 +1,4 @@
-## Gaussian Processes solubility parameters.
+## Gaussian Processes Hansen Solubility Parameters (gpHSP)
 
 <p align="center"> 
 <img src="images/gpHSP_in_a_nutshell.jpg">
@@ -7,7 +7,10 @@
 
 ## Code repo for gpHSP
 
-Want to predict a probabilisitc model for solublity? Have low amounts of data? then maybe gpHSP is the right tool for you.
+Want to predict a probabilisitc model for solublity?
+Have low amounts of data?
+
+.. then maybe gpHSP is the right tool for you.
 
 
 ## Todo 
