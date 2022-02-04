@@ -1,0 +1,12 @@
+names,smiles
+J52-Cl,c1cc(c2c(F)c(F)c(c3ccc(s3)c3sc4c(c5cc(Cl)c(C[C@H](CCCC)CC)s5)c5cc(C)sc5c(c4c3)c3cc(Cl)cs3)c3c2nn(n3)C[C@H](CCCCCC)CCCCCCCC)sc1C
+BTA3,CCCCCCc1ccc(C2(c3cc4c5sc(c6c7nn(CCCCCCCC)nc7c(/C=c\7/c(=O)n(CC)c(=C(C#N)C#N)s7)cc6)cc5C(c4cc3c3c2cc(c2ccc(c4c2nn(n4)CCCCCCCC)/C=c/2\sc(=C(C#N)C#N)n(c2=O)CC)s3)(c2ccc(CCCCCC)cc2)c2ccc(CCCCCC)cc2)c2ccc(CCCCCC)cc2)cc1
+BTA1,CCCCCCc1ccc(C2(c3cc4c5sc(c6c7nn(CCCCCCCC)nc7c(/C=C\7/C(=O)N(CC)C(=S)S7)cc6)cc5C(c4cc3c3c2cc(c2ccc(c4c2nn(n4)CCCCCCCC)/C=C/2\SC(=S)N(C2=O)CC)s3)(c2ccc(CCCCCC)cc2)c2ccc(CCCCCC)cc2)c2ccc(CCCCCC)cc2)cc1
+Trichloromethane,ClC(Cl)Cl
+THF (Tetrahydrofuran), C1COCC1
+2-MeTHF (2-Methyloxolane),[C@H]1(OCCC1)C
+Methylbenzene,c1ccccc1C
+o-xy (Ortho-xylene),Cc1ccccc1C
+A,Cc1cc2c(s1)c(c1c(c2C2=C[C@@H]([C@H](S2)C[C@@H](CC)CCCC)F)sc(c1)c1ccc(s1)c1c2c(c(s1)c1ccc(s1)C)C(=O)c1c(C2=O)c(sc1C[C@H](CCCC)CC)C[C@H](CC)CCCC)c1cc(c(s1)C[C@@H](CC)CCCC)F
+B,Cc1cc2c(cc1)C(=C(C#N)C#N)/C(=C/c1c(c3c(s1)c1c(s3)c3c(n1C[C@@H](CCCCCCCCCC)CCCCCCCCCCCC)c1c(c4c3nsn4)c3c(n1C[C@@H](CCCCCCCCCC)CCCCCCCCCCCC)c1c(s3)c(c([se]1)/C=C/1\C(=O)c3c(C1=C(C#N)C#N)ccc(c3)c1ccc(s1)C)CCCCCCCCCCC)CCCCCCCCCCC)/C2=O
+C,Cc1c(c2c(cc1Cl)C(=C(C#N)C#N)/C(=C/c1c(c3c(s1)c1c(s3)c3c(n1C[C@@H](CCCCCCCCCC)CCCCCCCC)c1c(c4c3nsn4)c3c(n1C[C@@H](CCCCCCCCCC)CCCCCCCC)c1c(s3)c(c(s1)/C=C/1\C(=O)c3c(C1=C(C#N)C#N)cc(c(c3Cl)c1ccc(s1)C)Cl)CCCCCCCCCCC)CCCCCCCCCCC)/C2=O)Cl
