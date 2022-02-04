@@ -9,6 +9,7 @@ import rdkit.Chem as Chem
 from mordred import descriptors as mordred_descriptors
 from tqdm.auto import tqdm
 
+Y_COLS = ['δd', 'δp', 'δh']
 
 def peek_df(df):
     print(df.columns)
@@ -39,11 +40,13 @@ def calculate_mask(values):
 
 
 def save_model(model, fname):
+    assert fname.endswith('.pkl'), f'Check your filename={fname}'
     with open(fname, "wb") as f:
         dill.dump(model, f)
 
 
 def load_model(fname):
+    assert fname.endswith('.pkl'), f'Check your filename={fname}'
     with open(fname, "rb") as f:
         model = dill.load(f)
     return model
