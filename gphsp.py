@@ -6,8 +6,8 @@ import numpy as np
 import pandas as pd
 import rdkit
 import rdkit.Chem as Chem
+import tensorflow as tf
 from mordred import descriptors as mordred_descriptors
-from tqdm.auto import tqdm
 
 Y_COLS = ['δd', 'δp', 'δh']
 
