@@ -51,6 +51,26 @@ def load_model(fname):
         model = dill.load(f)
     return model
 
+def _flat_array(a):
+    """Flatten array or tensor."""
+    a = a.numpy() if tf.is_tensor(a) else a
+    assert a.ndim == 1 or a.shape[1]==1, f'Expected 1D array {a.shape}'
+    return a.ravel()
+
+def evaluate(y_true, y_pred, y_std=None, info=None):
+    """Evaluate predictions."""
+    y_true = _flat_array(y_true)
+    y_pred = _flat_array(y_pred)
+    stat = info or {}
+    stat['R2'] = sklearn.metrics.r2_score(y_true, y_pred)
+    stat['MAE'] = sklearn.metrics.mean_absolute_error(y_true, y_pred)
+    stat['tau'] = stats.kendalltau(y_true, y_pred).correlation
+    if y_std is not None:
+        y_error = np.abs(y_true-y_pred)
+        stat['uncertainty_tau'] = stats.kendalltau(y_error, y_std).correlation
+
+    return stat
+
 
 class SmilesMap:
     """Class to map smiles to values."""
