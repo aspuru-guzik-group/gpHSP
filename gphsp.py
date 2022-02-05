@@ -69,15 +69,18 @@ def save_gp(model, adir, in_dim=6):
 def load_gp(adir):
     return tf.saved_model.load(adir)
 
-def make_gp(x, y, mean_dims=[0,1,2], std_dims=[3,4,5],
+def make_gp(x, y, parts, use_ard=True,
     const_mean = True):
-    ard = tf.convert_to_tensor(np.ones_like(mean_dims))
-    mean_kernel = gpf.kernels.SquaredExponential(lengthscales=ard,
-        active_dims=mean_dims)
-    ard = tf.convert_to_tensor(np.ones_like(std_dims))
-    std_kernel = gpf.kernels.SquaredExponential(lengthscales=ard,
-        active_dims=std_dims)
-    kernel = mean_kernel + std_kernel
+    kernel = None
+    for part in parts.values():
+        assert len(parts), f'Expected a list in {parts}'
+        if use_ard:
+            ard = tf.convert_to_tensor(np.ones_like(parts))
+            kernel_part = gpf.kernels.SquaredExponential(lengthscales=ard, active_dims=part)
+        else:
+            kernel_part = gpf.kernels.SquaredExponential(active_dims=part)
+        kernel = kernel_part if kernel is None else kernel + kernel_part
+
     mean_fn = gpf.mean_functions.Constant() if const_mean else None
     model = gpf.models.GPR(data=(x, y),
                        kernel=kernel,
