@@ -14,8 +14,6 @@ import sklearn.metrics
 import tensorflow as tf
 from mordred import descriptors as mordred_descriptors
 
-import gphsp
-
 Y_COLS = ['δd', 'δp', 'δh']
 
 def notebook_context():
