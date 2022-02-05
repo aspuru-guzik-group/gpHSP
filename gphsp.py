@@ -1,7 +1,7 @@
 """Common functions for gphsp."""
 import dill
 import gpflow as gpf
-import matplotlib_inline
+import matplotlib
 # Chem libraries
 import mordred
 import numpy as np
@@ -9,7 +9,7 @@ import pandas as pd
 import rdkit
 import rdkit.Chem as Chem
 import scipy.stats as stats
-import seaborn
+import seaborn as sns
 import sklearn.metrics
 import tensorflow as tf
 from mordred import descriptors as mordred_descriptors
