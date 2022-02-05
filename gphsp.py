@@ -1,5 +1,7 @@
 """Common functions for gphsp."""
 import dill
+import gpflow as gpf
+import matplotlib_inline
 # Chem libraries
 import mordred
 import numpy as np
@@ -7,11 +9,26 @@ import pandas as pd
 import rdkit
 import rdkit.Chem as Chem
 import scipy.stats as stats
+import seaborn
 import sklearn.metrics
 import tensorflow as tf
 from mordred import descriptors as mordred_descriptors
 
+import gphsp
+
 Y_COLS = ['δd', 'δp', 'δh']
+
+def notebook_context():
+    gpf.config.set_default_float(np.float64)
+    gpf.config.set_default_summary_fmt("notebook")
+    sns.set_context('talk', font_scale=1.25)
+    matplotlib.rcParams['figure.figsize'] = (12,8)
+    matplotlib.rcParams['lines.linewidth'] = 2
+    pd.set_option("display.precision", 3)
+
+def print_modules(mods):
+    for mod in mods:
+        print(f'{mod.__name__:10s} = {mod.__version__}')
 
 def peek_df(df):
     print(df.columns)
