@@ -46,6 +46,39 @@ def save_model(model, fname):
     with open(fname, "wb") as f:
         dill.dump(model, f)
 
+def save_gp(model, adir, in_dim=6):
+    model.predict = tf.function(model.predict_f,
+                            input_signature=[tf.TensorSpec(shape=[None, in_dim], dtype=tf.float64)])
+    tf.saved_model.save(model, adir)
+
+def load_gp(adir):
+    return tf.saved_model.load(adir)
+
+def make_gp(x, y, const_mean = True, use_rbf = True):
+    ard = tf.convert_to_tensor([1.0]*x.shape[-1])
+    if use_rbf:
+        kernel = gpf.kernels.SquaredExponential(lengthscales=ard)
+    else:
+        kernel = gpf.kernels.Linear(variance=ard)
+
+    mean_fn = gpf.mean_functions.Constant() if const_mean else None
+    model = gpf.models.GPR(data=(x, y),
+                       kernel=kernel,
+                       mean_function=mean_fn)
+    opt = gpf.optimizers.Scipy()
+    opt_logs = opt.minimize(model.training_loss,
+                        model.trainable_variables,
+                        options=dict(maxiter=1000))
+    return model
+
+def cast_1d_array(a):
+    """Flatten array or tensor."""
+    a = a.numpy() if tf.is_tensor(a) else a
+    assert a.ndim == 1 or a.shape[1]==1, f'Expected 1D array {a.shape}'
+    return a.ravel()
+
+def predict_from_model_dict(x, model_dict):
+    return {key: cast_1d_array(model.predict(x)) for key, model in model_dict.items()}
 
 def load_model(fname):
     assert fname.endswith('.pkl'), f'Check your filename={fname}'
@@ -53,16 +86,10 @@ def load_model(fname):
         model = dill.load(f)
     return model
 
-def _flat_array(a):
-    """Flatten array or tensor."""
-    a = a.numpy() if tf.is_tensor(a) else a
-    assert a.ndim == 1 or a.shape[1]==1, f'Expected 1D array {a.shape}'
-    return a.ravel()
-
 def evaluate(y_true, y_pred, y_std=None, info=None):
     """Evaluate predictions."""
-    y_true = _flat_array(y_true)
-    y_pred = _flat_array(y_pred)
+    y_true = cast_1d_array(y_true)
+    y_pred = cast_1d_array(y_pred)
     stat = info or {}
     stat['R2'] = sklearn.metrics.r2_score(y_true, y_pred)
     stat['MAE'] = sklearn.metrics.mean_absolute_error(y_true, y_pred)
