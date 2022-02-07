@@ -94,8 +94,8 @@ def predictions_as_features(x, model_dict, pred_fn=None):
     default_pred_fn = lambda model, inputs: model.pred_dist(inputs)
     pred_fn = pred_fn or default_pred_fn
     new_x = np.zeros((len(x), 6), dtype=np.float64)
-    for index, name in enumerate(names):
-        y_mol_dist = pred_fn(models[name], x)
+    for index, model in enumerate(model_dict.values()):
+        y_mol_dist = pred_fn(model, x)
         new_x[:,index] = y_mol_dist.mean()
         new_x[:,index+3] = y_mol_dist.mean()
     return new_x
