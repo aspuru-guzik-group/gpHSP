@@ -143,3 +143,15 @@ class SmilesMap:
     def __call__(self, inputs):
         index = self.index.loc[inputs].values
         return self.values[index][:, self.mask]
+
+    def update(self, new_smi, new_values):
+        needs_update = np.array([not s in features.index for s in smi])
+        if needs_update.sum()!=len(new_smi):
+            raise ValueError('Provide only new smiles and features')
+        if len(new_smi) != len(new_values) or new_values.ndim!=2:
+            raise ValueError('Inconsistent shapes')
+        n = len(self.index)
+        new_index = pd.Series(np.arange(n, n+len(new_smi)), index=new_smi)
+        self.index = self.index.append(new_index)
+        self.values = np.vstack((self.values, new_values))
+        return self
