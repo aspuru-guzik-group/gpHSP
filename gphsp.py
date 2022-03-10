@@ -145,7 +145,7 @@ class SmilesMap:
         return self.values[index][:, self.mask]
 
     def update(self, new_smi, new_values):
-        needs_update = np.array([not s in features.index for s in smi])
+        needs_update = np.array([not s in self.index.index for s in new_smi])
         if needs_update.sum()!=len(new_smi):
             raise ValueError('Provide only new smiles and features')
         if len(new_smi) != len(new_values) or new_values.ndim!=2:
